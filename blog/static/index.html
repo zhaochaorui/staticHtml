@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+  $.ajax({
+	url:"/api/test/show",
+	dataType:"json",
+	success:function(data){
+		console.log(data)
+	}
+  })
+});
+</script>
+</head>
+
+<body>
+		HELLO WORD
+</body>
+</html>
