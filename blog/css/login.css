@@ -1,4 +1,4 @@
-﻿*{
+*{
     margin: 0;
     padding: 0;
 }
@@ -10,7 +10,6 @@ body {
 
 @font-face {
     font-family: 'neo';
-    src: url("font/NEOTERICc.ttf");
 }
 input:focus{
 	outline: none;
@@ -72,8 +71,8 @@ input:focus{
     float: right;
 }
 #login #status{
-    width: 90px;
-    height: 35px;
+    width: 100px;
+    height: 40px;
     margin: 40px auto;
     color: #fff;
     font-size: 30px;

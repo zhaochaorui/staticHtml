@@ -1,11 +1,20 @@
-﻿
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <link rel="icon" type="" href="#" />
-    <link type="text/css" rel="styleSheet"  href="../css/login.css" />
+    <!-- <link type="text/css" rel="styleSheet"  href="../css/login.css?" /> -->
+	
+
+ <script>
+	var str='<link href="../css/login.css?'+Math.random()+'" rel="stylesheet" type="text/css"/>';
+	document.write(str);
+</script>
+
+	<script src="../js/jquery-3.3.1.min.js"></script>
+	<script src="../js/layer-v3.1.1/layer/layer.js" type="text/javascript" charset="utf-8"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>账号登录</title>
     <style>
@@ -292,17 +301,17 @@
         <div id="login_wrap">
             <div id="login"><!-- 登录注册切换动画 -->
                 <div id="status">
-                    <i style="top: 0">Log</i>
+                    <i style="top: 0px">Login</i>
                     <i style="top: 35px">Sign</i>
-                    <i style="right: 5px">in</i>
+                   <!-- <i style="top: -6px;right: 3px">in</i> -->
                 </div>
                 <span>
                     <form action="/login.action" method="post">
                         <p class="form"><input type="text" id="user" name="username" placeholder="username"></p>
                         <p class="form"><input type="password" id="passwd" name="password" placeholder="password"></p>
                         <p class="form confirm"><input type="password" id="confirm-passwd" placeholder="confirm password"></p>
-						<p class="form confirm"><input type="text" id="phone" placeholder="your phone"></p>
-						<p class="form confirm"><input type="text" id="phonecode" placeholder="your code"></p>
+						<p class="form confirm"><input type="text" id="phoneNumber" name = 'phoneNumber' placeholder="your phone"></p>
+						<p class="form confirm"><input type="text" id="phoneCode" name = 'phoneCode' placeholder="your code"></p>
                         <input type="button" value="Login" class="btn" onclick='login()' style="margin-right: 20px;">
                         <input type="button" value="Sign in" class="btn" onclick='signin()' id="btn">
                     </form>
@@ -339,9 +348,29 @@
     var confirm_password = document.getElementsByClassName("confirm")[0]
 	var confirm_sms = document.getElementsByClassName("confirm")[1]
 	var confirm_code = document.getElementsByClassName("confirm")[2]
-    //var user = document.getElementById("user")
-    //var passwd = document.getElementById("passwd")
-    //var con_pass = document.getElementById("confirm-passwd")
+
+    $("#user").blur(function(){
+		var username =$(this).val().trim();
+    	if(username==""){
+    		layer.msg('用户名不能为空！');
+    		return
+    	}
+    })
+    $("#passwd").blur(function(){
+		var password = $(this).val().trim();
+    	if(password==""){
+    		layer.msg('密码不能为空！');
+    		return
+    	}
+    })
+    $("#confirm-passwd").blur(function(){
+		var password = $("#passwd").val().trim();
+		var confirmPasswd = $(this).val().trim();
+    	if(password!=confirmPasswd){
+    		layer.msg('两次密码输入不一致！');
+    		return
+    	}
+    })
     
     //自动居中title
     var name_c = document.getElementById("title")
@@ -382,8 +411,18 @@
        }*/
     //注册按钮
     function signin() {
+
         let status = document.getElementById("status").getElementsByTagName("i")
         let hit = document.getElementById("hint").getElementsByTagName("p")[0]
+		var username = $("#user").val().trim();
+		var password= $("#passwd").val().trim();
+		var confirmPasswd=$("#confirm-passwd").val().trim();
+		var phoneNumber= $("#phoneNumber").val().trim();
+		var phoneCode= $("#phoneCode").val().trim();
+		
+		
+		
+		
         if (onoff) {
             confirm_password.style.height = 51 + "px"
             status[0].style.top = 35 + "px"
@@ -397,27 +436,22 @@
             onoff = !onoff         
 			
         } else {
-			//执行注册
-            /*if (!/^[A-Za-z0-9]+$/.test(user.value))
-                hit.innerHTML = "账号只能为英文和数字"
-            else if (user.value.length < 6)
-                hit.innerHTML = "账号长度必须大于6位"
-            else if (passwd.value.length < 6)
-                hit.innerHTML = "密码长度必须大于6位"
-            else if (passwd.value != con_pass.value)
-                hit.innerHTML = "两次密码不相等"
-            else if (passwd.value = con_pass.value) {
-                submit(function(res) {
-                    if (res == "exist")
-                        hit.innerHTML = "该账号已存在"
-                    else if (res == true) {
-                        hit.innerHTML = "账号注册成功，两秒后自动刷新页面"
-                        setTimeout("window.location.reload()", 2000)
-                    } else if (res == false)
-                        hit.innerHTML = "账号注册失败"
-                })
-            }
-            hint()*/
+			
+			
+			$.ajax({
+				url:"/user/sign/account",
+				contentType:"application/json; charset=utf-8",
+				data:JSON.stringify({"username":username,"password":password,"confirmPasswd":confirmPasswd,"phoneNumber":phoneNumber,"phoneCode":phoneCode}),
+				dateType:"json",
+				type:"post",
+				success:function(data){
+					console.log(data);
+				},
+				error:function(error){
+					
+				}
+			})
+          //  hint()
         }
     }
 
@@ -425,8 +459,26 @@
     function login() {
 		
         if (onoff) {
+			var username = $("#user").val().trim();
+			console.log(username)
+			var password= $("#passwd").val().trim();
 			console.log("登录")
+		
+			$("form").submit();
 			//执行登录方法
+// 			$.ajax({
+// 				url:"/login.action",
+// 				contentType:"application/json; charset=utf-8",
+// 				data:{"username":username,"password":password},
+// 				dateType:"json",
+// 				type:"post",
+// 				success:function(data){
+// 					console.log(data);
+// 				},
+// 				error:function(error){
+// 					
+// 				}
+// 			})
            
         } else {
             let status = document.getElementById("status").getElementsByTagName("i")
@@ -442,7 +494,6 @@
             onoff = !onoff
         }
     }
-
 </script>
 
 </html>
