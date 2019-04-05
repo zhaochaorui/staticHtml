@@ -371,6 +371,14 @@
     		return
     	}
     })
+	$("#phoneNumber").blur(function(){
+		var phoneNumber = $("#phoneNumber").val().trim();
+		var phoneReg=/^1[34578]\d{9}$/;
+		if(!phoneReg.test(phoneNumber)){
+			layer.msg('手机号格式不正确');
+		}
+		
+	})
     
     //自动居中title
     var name_c = document.getElementById("title")
