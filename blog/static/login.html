@@ -371,6 +371,20 @@
     		return
     	}
     })
+	$("#phoneNumber").blur(function(){
+		var phoneNumber = $("#phoneNumber").val().trim();
+		console.log(phoneNumber)
+		var phoneReg=/^1[34578]\d{9}$/;
+		if(!phoneReg.test(phoneNumber)){
+			layer.msg('手机号格式不正确');
+			
+		}
+		//检验手机号是否被注册
+		$.get("/user/open/send/code",{"phoneNumber":phoneNumber},function(data){
+			console.log(data);
+		})
+		
+	})
     
     //自动居中title
     var name_c = document.getElementById("title")
