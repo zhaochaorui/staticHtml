@@ -1,0 +1,217 @@
+
+    <div class="layui-container">
+        <div class="layui-row layui-col-space15">
+            <!-- 轮播公告-->
+            <div class="layui-col-md12">
+                <div class="layui-card">
+                    <div class="layui-card-body  layui-card-msg">
+                        <i class="layui-icon layui-icon-location" style="margin-right: 7px;"></i>
+                        <div class="layui-card-title"></div>
+							<script id ="categoryTitleId" type="text/html">
+								<span lay-separator="&gt;" class="layui-breadcrumb" style="visibility: visible;">
+									<a href="#!home">首页</a><span lay-separator="">&gt;</span>
+									<a href="#!article/articlelist"><cite>博文广场</cite></a>
+									{{if cateName!=''}}
+									<span lay-separator="">&gt;</span>
+									 <a><cite id="cate">{{cateName}}</cite></a>
+									{{/if}}
+								</span>
+							</script>
+                        
+                    </div>
+                </div>
+            </div>
+            <div class="layui-col-md8">
+                <div class="layui-row layui-col-space15">
+
+                  <div class="layui-col-md12">
+                      <div class="layui-card" >
+                          <div class="layui-card-header"><i class="layui-icon layui-icon-chart"></i>最新博文</div>
+                          <div class="layui-card-body" id="article-content" ></div><div id="page" style="margin-left: 200px;"></div>
+                  		<script id ="articleId" type="text/html">
+                  			{{each data as value }}
+                  				<div class="article" >
+                  					<div class="article-left">
+                  						<img src="static/img/article/zuimeiaiqing.jpg">
+                  					</div>
+                  					<div class="article-right">
+                  						<div class="article-title">
+                  							<a href="#!article/articledetail/{{value.articleId}}"  >{{value.articleTitle}}</a>
+                  						</div>
+                  						<div class="article-abstract">
+                  							{{value.articleDesc}}
+                  						</div>
+                  						<div class="article-footer">
+                  							<span class="layui-hide-xs"><i class="layui-icon layui-icon-note"></i>&nbsp;<a href="javascript:;" style="color:#009688">{{value.cateName}}</a></span>
+                  							<span><i class="layui-icon layui-icon-log"></i> &nbsp;{{value.createTime}}</span>
+                  							<span>{{value.articleLookNum}}阅读</span>
+                  							<span class="article-viewinfo">{{value.articleCommentNum}}评论</span>
+                  							<span class="article-viewinfo">{{value.articlePraiseNum}}赞</span>
+                  							<a title="{{value.articleTitle}}" href="#!article/articledetail/{{value.articleId}}" class="read layui-btn layui-btn-xs layui-btn-normal layui-hide-xs">阅读全文</a>
+                  						</div>
+                  					</div>
+                  				</div>
+                  			{{/each}}
+                  		</script>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="layui-col-md4">
+             <div class="layui-card ">
+                 <div class="layui-card-header classific-nav-header">分类导航</div>
+                 <div class="layui-card-body classific-nav-boday  layui-row layui-col-space10 " id="category">
+             		<script id ="categoryId" type="text/html">
+             			{{each data as value i}}
+             				<div class="layui-col-xs6">
+             					<a href="#!article/articlelist/{{value.cateId}}">{{value.cateName}}</a> 
+             				</div>
+             			{{/each}}
+                     </script>
+                 </div>
+             </div>
+                <div class="layui-card">
+                    <div class="layui-card-header"><i class="layui-icon layui-icon-praise"></i>作者推荐</div>
+                    <div class="layui-card-body">
+                        <ul class="blog-card-ul" id="recommendArticleUl"></ul>
+						<script id ="recommendArticleId" type="text/html">
+                            {{each data as value index}}
+                           	<li>
+                           		<span class="layui-badge layui-bg-blue">{{index+1}}</span><a title="{{value.articleTitle}}" href="#!article/articledetail/{{value.articleId}}">{{value.articleTitle}}</a>
+                           	</li>
+                           {{/each}}
+						</script>
+                    </div>
+                </div>
+                <div class="layui-card">
+                    <div class="layui-card-header"><i class="layui-icon layui-icon-tree"></i>随便看看</div>
+                    <div class="layui-card-body">
+                        <ul class="blog-card-ul">
+                            <li>
+                                <span class="layui-badge ">1</span><a title="邮我组件 - 用户点击即可发送邮件" href="javascript:;">最美的爱情，我们看不到</a>
+                            </li>
+                            <li>
+                                <span class="layui-badge ">2</span><a title="后台可以管理文章了，接下来开始做博客前台。" href="javascript:;">最美的爱情，我们看不到</a>
+                            </li>
+                            <li>
+                                <span class="layui-badge ">3</span><a title="ASP.NET Core中间件" href="/article/detail/5">最美的爱情，我们看不到</a>
+                            </li>
+                            <li>
+                                <span class="layui-badge layui-bg-blue">4</span><a title="新功能上线 - 博文打赏（网站分享组件推荐）" href="javascript:;">最美的爱情，我们看不到</a>
+                            </li>
+                            <li>
+                                <span class="layui-badge layui-bg-blue">5</span><a title="新功能上线 - 博文配乐（网页音乐播放器推荐）" href="javascript:;">最美的爱情，我们看不到</a>
+                            </li>
+                            <li>
+                                <span class="layui-badge layui-bg-blue">6</span><a title="Blocksit+Layui实现响应式瀑布流加载" href="javascript:;">最美的爱情，我们看不到</a>
+                            </li>
+                            <li>
+                                <span class="layui-badge layui-bg-blue">7</span><a title="纯CSS实现文章左上角Flag标签" href="javascript:;">最美的爱情，我们看不到</a>
+                            </li>
+                            <li>
+                                <span class="layui-badge layui-bg-blue">8</span><a title="ASP.NET Core第三方认证之QQ登录" href="javascript:;">最美的爱情，我们看不到</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="layui-card">
+                    <div class="layui-card-header"><i class="layui-icon layui-icon-flag"></i>赞助商</div>
+                    <div class="layui-card-body blog-production">
+                        <a class="layui-bg-blue" target="_blank" href="http://www.layui.com/">layui经典模块化前端框架</a>
+                        <a style="background-color: #4CAF50;" target="_blank" href="http://www.layui.com/admin/?from=fly">layuiAdmin - layui 官方后台管理模板</a>
+                    </div>
+                </div>
+
+                <div class="layui-card">
+                    <div class="layui-card-header"><i class="layui-icon layui-icon-template"></i>个人作品</div>
+                    <div class="layui-card-body blog-production">
+                        <a class="layui-bg-green" target="_blank" href="http://www.yangxiaobing.org">后台管理系统iframe版</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+<script type="text/javascript">
+	function next(cur){
+		$.get("/article/api/list/0/0",{"currentPage":cur,"pageSize":2},function(response){
+			var htmls = template('articleId', response.data);
+			$("#article-content").html(htmls);
+		})
+	}
+	$(function(){
+			var url = window.location.href;
+			var index = url.lastIndexOf("/");
+			var subfix= url.substring(index+1);
+			var ref=/^\d+$/
+			var f = ref.test(subfix)
+			if(!f){
+				subfix=0
+			}
+			//文章列表
+			$.ajax({
+				url:"/article/api/list/"+subfix+"/0",		//subfix is cateId
+				data:{"currentPage":1,"pageSize":10},
+				dataType:"json",
+				success:function(response){
+					layui.use('laypage', function(){
+					  var laypage = layui.laypage;
+					  //执行一个laypage实例
+					  laypage.render({
+					    elem: 'page' //注意，这里的 test1 是 ID，不用加 # 号
+					    ,count: response.data.totalCount ,//数据总数，从服务端得到
+						limit: 10,
+						groups:5,
+						  jump: function(obj, first){
+							//obj包含了当前分页的所有参数，比如：
+							//console.log(obj.curr); //得到当前页，以便向服务端请求对应页的数据。
+							next(obj.curr)
+							//首次不执行
+							if(!first){
+							  //do something
+							}
+						  }
+					  });
+					});
+				}
+				
+			})
+			//分类
+			$.get("/article/api/category/list/6",function(response){
+				var array = response.data
+				var cateName='';
+				for(var i=0;i<array.length;i++){
+				
+					if(subfix==array[i].cateId){
+						cateName=array[i].cateName;
+					}
+				}
+				response['cateName']=cateName
+				var html1 = template('categoryTitleId', response);
+				$(".layui-card-title").html(html1);
+				
+				var html2 = template('categoryId', response);
+				$("#category").html(html2);
+			})
+			//作者推荐
+			$.get("/article/api/recommend/6",function(response){
+				var htmls = template('recommendArticleId', response);
+				$("#recommendArticleUl").html(htmls);
+			})
+			
+		})
+	
+	
+    layui.use(['element','layer','jquery','carousel'], function(){
+        var element = layui.element,
+            $ = layui.jquery,
+            layer = layui.layer,
+            carousel = layui.carousel;
+
+
+
+
+    });
+</script>

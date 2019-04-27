@@ -1,0 +1,617 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="" href="#" />
+    <!-- <link type="text/css" rel="styleSheet"  href="../css/login.css?" /> -->
+	
+
+ <script>
+	var str='<link href="../css/login.css?'+Math.random()+'" rel="stylesheet" type="text/css"/>';
+	document.write(str);
+</script>
+
+	<script src="../js/jquery-3.3.1.min.js"></script>
+	<script src="../js/layer-v3.1.1/layer/layer.js" type="text/javascript" charset="utf-8"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>账号登录</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        
+        html,
+        body {
+            height: 100%;
+        }
+
+
+        input:focus{
+			outline: none;
+		}
+		.form input{
+			width: 300px;
+			height: 30px;
+			font-size: 18px;
+            background: none;
+            border: none;
+            border-bottom: 1px solid #fff;
+            color: #fff;
+            margin-bottom: 20px;
+		}
+        .form input::placeholder{
+            color: rgba(255,255,255,0.8);
+            font-size: 18px;
+            font-family: "neo";
+        }
+        .confirm{
+            height: 0;
+            overflow: hidden;
+            transition: .25s;
+        }
+		.btn{
+			width:140px;
+			height: 40px;
+			border: 1px solid #fff;
+            background: none;
+			font-size:20px;
+			color: #fff;
+            cursor: pointer;
+            margin-top: 25px;
+            font-family: "neo";
+            transition: .25s;
+		}
+        .btn:hover{
+            background: rgba(255,255,255,.25);
+        }
+        #login_wrap{
+            width: 980px;
+            min-height: 500px;
+            border-radius: 10px;
+            font-family: "neo";
+            overflow: hidden;
+            box-shadow: 0px 0px 120px rgba(0, 0, 0, 0.25);
+            position: fixed;
+            top: 50%;
+            right: 50%;
+            margin-top: -250px;
+            margin-right: -490px;
+        }
+        #login{
+            width: 50%;
+            height: 100%;
+            min-height: 500px;
+            background: linear-gradient(45deg, #9a444e, #e06267);
+            position: relative;
+            float: right;
+        }
+        #login #status{
+            width: 90px;
+            height: 35px;
+            margin: 40px auto;
+            color: #fff;
+            font-size: 30px;
+            font-weight: 600;
+            position: relative;
+            overflow: hidden;
+        }
+        #login #status i{
+            font-style: normal;
+            position: absolute;
+            transition: .5s
+        }
+        #login span{
+            text-align: center;
+            position: absolute;
+            left: 50%;
+            margin-left: -150px;
+            top: 52%;
+            margin-top: -140px;
+        }
+        #login span a{
+            text-decoration: none;
+            color: #fff;
+            display: block;
+            margin-top: 80px;
+            font-size: 18px;
+        }
+        #bg{
+            background: linear-gradient(45deg, #211136, #bf5853);
+            height: 100%;
+        }
+        /*绘图*/
+        #login_img{
+            width: 50%;
+            min-height: 500px;
+            background: linear-gradient(45deg, #221334, #6c3049);
+            float: left;
+            position: relative;
+        }
+        #login_img span{
+            position: absolute;
+            display: block;
+        }
+        #login_img .circle{
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #df5555, #ef907a);
+            top: 70px;
+            left: 50%;
+            margin-left: -100px;
+            overflow: hidden;
+        }
+        #login_img .circle span{
+            width: 150px;
+            height: 40px;
+            border-radius: 50px;
+            position: absolute;
+        }
+        #login_img .circle span:nth-child(1){
+            top: 30px;
+            left: -38px;
+            background: #c55c59;
+        }
+        #login_img .circle span:nth-child(2){
+            bottom: 20px;
+            right: -35px;
+            background: #934555;
+        }
+        #login_img .star span{
+            background: radial-gradient(#fff 10%,#fff 20%,rgba(72, 34, 64, 0));
+            border-radius: 50%;
+            box-shadow: 0 0 7px #fff;
+        }
+        #login_img .star span:nth-child(1){
+            width: 15px;
+            height: 15px;
+            top: 50px;
+            left: 30px;
+        }
+        #login_img .star span:nth-child(2){
+            width: 10px;
+            height: 10px;
+            left: 360px;
+            top: 80px;
+        }
+        #login_img .star span:nth-child(3){
+            width: 5px;
+            height: 5px;
+            top: 400px;
+            left: 80px;
+        }
+        #login_img .star span:nth-child(4){
+            width: 8px;
+            height: 8px;
+            top: 240px;
+            left: 60px;
+        }
+        #login_img .star span:nth-child(5){
+            width: 4px;
+            height: 4px;
+            top: 20px;
+            left: 200px;
+        }
+        #login_img .star span:nth-child(6){
+            width: 4px;
+            height: 4px;
+            top: 460px;
+            left: 410px;
+        }
+        #login_img .star span:nth-child(7){
+            width: 6px;
+            height: 6px;
+            top: 250px;
+            left: 350px;
+        }
+        #login_img .fly_star span{
+            width: 90px;
+            height: 3px;
+            background: -webkit-linear-gradient(left, rgba(255, 255, 255, 0.67), rgba(255,255,255,0));
+            background: -o-linear-gradient(left, rgba(255, 255, 255, 0.67), rgba(255,255,255,0));
+            background: linear-gradient(to right, rgba(255, 255, 255, 0.67), rgba(255,255,255,0));
+            transform: rotate(-45deg);
+        }
+        #login_img .fly_star span:nth-child(1){
+            top:60px;
+            left: 80px;
+        }
+        #login_img .fly_star span:nth-child(2){
+            top: 210px;
+            left: 332px;
+            opacity: 0.6;
+        }
+        #login_img p{
+            text-align: center;
+            color: #af4b55;
+            font-weight: 600;
+            margin-top: 365px;
+            font-size: 25px;
+        }
+        #login_img p i{
+            font-style: normal;
+            margin-right: 45px;
+        }
+        #login_img p i:nth-last-child(1){
+            margin-right: 0;
+        }
+        /*提示*/
+        #hint{
+            width: 100%;
+            line-height: 70px;
+            background: linear-gradient(-90deg, #9b494d, #bf5853);
+            text-align: center;
+            font-size: 25px;
+            color: #fff;
+            box-shadow: 0 0 20px #733544;
+            display: none;
+            opacity: 0;
+            transition: .5s;
+            position: absolute;
+            top: 0;
+            z-index: 999;
+        }
+        /* 响应式 */
+        @media screen and (max-width:1000px ) {
+            #login_img{
+                display: none;
+            }
+            #login_wrap{
+                width: 490px;
+                margin-right: -245px;
+            }
+            #login{
+                width: 100%;
+                
+            }
+        }
+        @media screen and (max-width:560px ) {
+            #login_wrap{
+                width: 330px;
+                margin-right: -165px;
+            }
+            #login span{
+                margin-left: -125px;
+            }
+            .form input{
+                width: 250px;
+            }
+            .btn{
+                width: 113px;
+            }
+        }
+        @media screen and (max-width:345px ) {
+            #login_wrap {
+                width: 290px;
+                margin-right: -145px;
+            }
+        }
+    </style>
+</head>
+
+
+<body>
+    <div id="bg">
+        <div id="hint"><!-- 提示框 -->
+            <p>登录失败</p>
+        </div>
+        <div id="login_wrap">
+            <div id="login"><!-- 登录注册切换动画 -->
+                <div id="status">
+                    <i style="top: 0px">Login</i>
+                    <i style="top: 35px">Sign</i>
+                   <!-- <i style="top: -6px;right: 3px">in</i> -->
+                </div>
+                <span>
+                    <form action="/login.action" method="post">
+                        <p class="form"><input type="text" id="user" name="username" placeholder="username"></p>
+                        <p class="form"><input type="password" id="passwd" name="password" placeholder="password"></p>
+                        <p class="form confirm"><input type="password" id="confirm-passwd" placeholder="confirm password"></p>
+						<p class="form confirm"><input type="text" id="phoneNumber" name = 'phoneNumber' placeholder="your phone"></p>
+						<p class="form confirm"><input type="text" id="phoneCode" name = 'phoneCode' placeholder="your code"></p>
+                        <input type="button" value="Login"  class="btn" onclick='login()' style="margin-right: 20px;">
+                        <input type="button" value="Sign in"  class="btn" onclick='signin()'>
+                    </form>
+                    <a href="#">Forget your password?</a>
+                </span>
+            </div>
+
+            <div id="login_img"><!-- 图片绘制框 -->
+                <span class="circle">
+                    <span></span>
+                    <span></span>
+                </span>
+                <span class="star">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </span>
+                <span class="fly_star">
+                    <span></span>
+                    <span></span>
+                </span>
+                <p id="title">CLOUD</p>
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+
+    var onoff = true//根据此布尔值判断当前为注册状态还是登录状态
+    var confirm_password = document.getElementsByClassName("confirm")[0]
+	var confirm_sms = document.getElementsByClassName("confirm")[1]
+	var confirm_code = document.getElementsByClassName("confirm")[2]
+
+
+//     
+	$("#phoneCode").blur(function(){
+		var phoneNumber = $("#phoneNumber").val().trim();
+		var phoneCode = $("#phoneCode").val().trim();
+		if(phoneCode==""){
+			layer.msg("验证码不能为空");
+			return ;
+		}
+		var res=checkCode(phoneNumber,phoneCode);
+		if(!res){
+			layer.msg("验证码不正确");
+		}
+	})
+// 	
+	
+    //自动居中title
+    var name_c = document.getElementById("title")
+    name = name_c.innerHTML.split("")
+    name_c.innerHTML = ""
+    for (i = 0; i < name.length; i++)
+        if (name[i] != ",")
+            name_c.innerHTML += "<i>" + name[i] + "</i>"
+    //引用hint()在最上方弹出提示
+    function hint() {
+        let hit = document.getElementById("hint")
+        hit.style.display = "block"
+        setTimeout("hit.style.opacity = 1", 0)
+        setTimeout("hit.style.opacity = 0", 2000)
+        setTimeout('hit.style.display = "none"', 3000)
+    }
+ 
+    //注册按钮
+    function signin() {
+		//$(".btn").eq(1).attr('disabled',true);
+        let status = document.getElementById("status").getElementsByTagName("i")
+        let hit = document.getElementById("hint").getElementsByTagName("p")[0]
+
+		
+		
+		
+		
+        if (onoff) {
+            confirm_password.style.height = 51 + "px"
+            status[0].style.top = 35 + "px"
+            status[1].style.top = 0
+			confirm_sms.style.height = 51 + "px"
+            status[0].style.top = 35 + "px"
+            status[1].style.top = 0
+			confirm_code.style.height = 51 + "px"
+            status[0].style.top = 35 + "px"
+            status[1].style.top = 0
+            onoff = !onoff 
+			$("#phoneNumber").blur(function(){
+				var phoneNumber = $("#phoneNumber").val().trim();
+				if(phoneNumber==""){
+					layer.msg('手机号不能为空');
+					return;
+				}
+				var phoneReg=/^1[34578]\d{9}$/;
+				if(!phoneReg.test(phoneNumber)){
+					layer.msg('手机号格式不正确');
+					return;
+				}
+				//发送短信
+				layer.confirm('是否发送短信', {
+				  btn: ['是的','不要'] //按钮
+				}, function(){
+				 	 checkPhoneNumber(phoneNumber);
+				}, function(){
+				});
+				
+			})
+			if(phoneCode==''){
+					layer.msg("验证码不能为空");
+					return ;
+			}
+        } else {
+			var username = $("#user").val().trim();
+			var password= $("#passwd").val().trim();
+			var confirmPasswd=$("#confirm-passwd").val().trim();
+			var phoneNumber= $("#phoneNumber").val().trim();
+			var phoneCode= $("#phoneCode").val().trim();
+			if(username==''){
+				layer.msg('用户名不能为空！');
+				return
+			}
+			if(password==''){
+				layer.msg('密码不能为空！');
+				return
+			}
+			
+			if(password!=confirmPasswd){
+				layer.msg('两次密码输入不一致！');
+				return
+			}
+			
+			if(phoneNumber==''){
+				var phoneReg=/^1[34578]\d{9}$/;
+				if(phoneNumber==""){
+					layer.msg("手机号不能为空");
+					return ;
+				}
+				if(!phoneReg.test(phoneNumber)){
+					layer.msg('手机号格式不正确');
+					return;
+				}
+			}
+			if(phoneCode==''){
+					layer.msg("验证码不能为空");
+					return ;
+			}
+
+// 			var res=checkCode(phoneNumber,phoneCode)
+// 			console.log("checkCode返回值"+res)
+// 			if(!res){
+// 				layer.msg("验证码不正确");
+// 				return;
+// 			}
+			console.log(checkCode(phoneNumber,phoneCode))
+			$.ajax({
+				url:"/user/open/sign/account",
+				contentType:"application/json; charset=utf-8",
+				data:JSON.stringify({"username":username,"password":password,"confirmPassword":confirmPasswd,"phoneNumber":phoneNumber,"phoneCode":phoneCode}),
+				dateType:"json",
+				type:"post",
+				success:function(response){
+					console.log(response);
+					if(response.data=='ok'){
+						login();
+						layer.msg("注册成功,可以登录了");
+					}else if(response.data==1&&response.code==200){
+							phoneNumber==phoneNumber;
+							layer.msg("短信发送成功,请注意查看");
+						}else if(response.code==10000){		//已被注册
+							layer.msg("该手机号已被注册");
+						}else if(response.code==10002){
+							layer.msg("验证码不正确");
+						}else if(response.code==10003){
+							layer.msg("用户名已被注册");
+						}else if(response.code==10004){
+							layer.msg("请检查参数");
+						}else if(response.code==10006){
+							layer.msg("两次密码输入不一致");
+						}else{
+							layer.msg("服务器连接超时");
+						}
+				},
+				error:function(error){
+					layer.msg("服务器连接超时");
+				}
+			})
+			
+          //  hint()
+        }
+
+		
+}
+
+    //登录按钮
+    function login() {
+		
+        if (onoff) {
+			var username = $("#user").val().trim();
+			var password= $("#passwd").val().trim();
+			if(username==""){
+				layer.msg('用户名不能为空！');
+				return
+			}
+			if(password==""){
+				layer.msg('密码不能为空！');
+				return
+			}
+			console.log(username)
+
+			console.log("登录")
+
+			$.ajax({
+				url:"/login.action",
+				contentType:"application/x-www-form-urlencoded",
+				data:{"username":username,"password":password},
+				dateType:"json",
+				type:"post",
+				success:function(data){
+					console.log(data)
+			//		var data=JSON.parse(data)
+					if(data.status==200){
+						href=window.location.href;
+						var index= href.indexOf("redirectUrl=");
+						var newHref="/www/index.html";
+						if(index!=-1){
+							newHref=href.substring(index+12);
+						}
+					
+						location.href=newHref
+					}else{
+						layer.msg("密码不正确或不存在");
+					}
+				},
+				error:function(error){
+					layer.msg("服务器连接失败");
+				}
+			})
+           
+        } else {
+            let status = document.getElementById("status").getElementsByTagName("i")
+            confirm_sms.style.height = 0
+            status[0].style.top = 0
+            status[1].style.top = 35 + "px"
+			confirm_password.style.height = 0
+            status[0].style.top = 0
+            status[1].style.top = 35 + "px"
+			confirm_code.style.height = 0
+            status[0].style.top = 0
+            status[1].style.top = 35 + "px"
+            onoff = !onoff
+		
+					
+        }
+    }
+	//检验验证码
+	function checkCode(phoneNumber,phoneCode){
+		var flag=false;
+		$.ajax({
+		url:"/user/open/check/code",
+		async:false,
+		data:{"phoneNumber":phoneNumber,"phoneCode":phoneCode},
+		success:function(response){
+			if(response.data!='ok'){
+				console.log("验证码错误")
+				flag= false;
+			}else{
+				console.log("验证码正确")
+				flag= true;
+			}
+			
+		}
+		})
+
+		return flag;
+		
+	}
+	
+	function checkPhoneNumber(phoneNumber){
+		$.get("/user/open/send/code",{"phoneNumber":phoneNumber},function(response){
+						console.log(response)
+						if(response.data==1&&response.code==200){
+							phoneNumber==phoneNumber;
+							layer.msg("短信发送成功,请注意查看");
+						}else if(response.code==10000){		//已被注册
+							layer.msg("该手机号已被注册");
+						}else if(response.code==10001){
+							layer.msg("操作太过频繁,等一会再试试吧");
+						}else if(response.code==10004){
+							layer.msg("手机号不能为空");
+						}else if(response.code==10005){
+							layer.msg("手机号格式不正确");
+						}else{
+							layer.msg("服务器连接超时");
+						}
+		})
+	}
+</script>
+
+</html>

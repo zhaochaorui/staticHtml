@@ -1,0 +1,376 @@
+
+    <div class="layui-container">
+        <div class="layui-row layui-col-space15">
+            <!-- 轮播公告-->
+            <div class="layui-col-md12">
+                <div class="layui-card">
+                    <div class="layui-card-body  layui-card-msg">
+                        <i class="layui-icon layui-icon-speaker"></i>
+                        <div class="layui-carousel"  id="carousel-msg">
+                            <div carousel-item>
+                                <span class="defaultcolor">功能正在一步步完善</span>
+                                <span class="dangercolor">目前大部分都是假数据。</span>
+								<span class="dangercolor">联系V 1351491099。</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-col-md8">
+                <div class="layui-row layui-col-space15">
+                    <div class="layui-col-md12">
+                        <div class="layui-card">
+                            <div class="layui-card-header"><i class="layui-icon layui-icon-diamond"></i>置顶博文</div>
+                            <div class="layui-card-body" id ="article-up">
+                                <script id ="articleId" type="text/html">
+                                	{{each data as value }}
+                                		<div class="article" >
+                                			<div class="article-left">
+                                				<img src="static/img/article/zuimeiaiqing.jpg">
+                                			</div>
+                                			<div class="article-right">
+                                				<div class="article-title">
+                                					<a href="#!article/articledetail/{{value.articleId}}"  >{{value.articleTitle}}</a>
+                                				</div>
+                                				<div class="article-abstract">
+                                					{{value.articleDesc}}
+                                				</div>
+                                				<div class="article-footer">
+                                					<span class="layui-hide-xs"><i class="layui-icon layui-icon-note"></i>&nbsp;<a href="javascript:;" style="color:#009688">{{value.cateName}}</a></span>
+                                					<span><i class="layui-icon layui-icon-log"></i> &nbsp;{{value.createTime}}</span>
+                                					<span>{{value.articleLookNum}}阅读</span>
+                                					<span class="article-viewinfo">{{value.articleCommentNum}}评论</span>
+                                					<span class="article-viewinfo">{{value.articlePraiseNum}}赞</span>
+                                					<a title="{{value.articleTitle}}" href="#!article/articledetail/{{value.articleId}}" class="read layui-btn layui-btn-xs layui-btn-normal layui-hide-xs">阅读全文</a>
+                                				</div>
+                                			</div>
+                                		</div>
+                                	{{/each}}
+                                </script>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-col-md12">
+                        <div class="layui-card" >
+                            <div class="layui-card-header"><i class="layui-icon layui-icon-chart"></i>最新博文</div>
+                            <div class="layui-card-body" id="article-content" ></div><div id="page" style="margin-left: 200px;"></div>
+							<script id ="articleId" type="text/html">
+								{{each data as value }}
+									<div class="article" >
+										<div class="article-left">
+											<img src="static/img/article/zuimeiaiqing.jpg">
+										</div>
+										<div class="article-right">
+											<div class="article-title">
+												<a href="#!article/articledetail/{{value.articleId}}"  >{{value.articleTitle}}</a>
+											</div>
+											<div class="article-abstract">
+												{{value.articleDesc}}
+											</div>
+											<div class="article-footer">
+												<span class="layui-hide-xs"><i class="layui-icon layui-icon-note"></i>&nbsp;<a href="javascript:;" style="color:#009688">{{value.cateName}}</a></span>
+												<span><i class="layui-icon layui-icon-log"></i> &nbsp;{{value.createTime}}</span>
+												<span>{{value.articleLookNum}}阅读</span>
+												<span class="article-viewinfo">{{value.articleCommentNum}}评论</span>
+												<span class="article-viewinfo">{{value.articlePraiseNum}}赞</span>
+												<a title="{{value.articleTitle}}" href="#!article/articledetail/{{value.articleId}}" class="read layui-btn layui-btn-xs layui-btn-normal layui-hide-xs">阅读全文</a>
+											</div>
+										</div>
+									</div>
+								{{/each}}
+							</script>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="layui-col-md4">
+                <div class="layui-card">
+                    <div class="layui-card-body blogerinfo layui-row layui-col-space10">
+                        <div class="layui-col-xs12">
+                            <div class="layui-row">
+                                <div class="layui-col-xs4">
+                                    <div class="blogerinfo-figure">
+                                        <img class="layui-circle" src="static/img/face.jpg">
+                                    </div>
+                                </div>
+                                <div class="layui-col-xs8">
+                                    <div class="blogerinfo-info">
+                                        <p class="blogerinfo-nickname">qihaoya</p>
+                                        <p class="blogerinfo-introduce">一生全靠浪</p>
+                                        <p class="blogerinfo-location"><i class="layui-icon layui-icon-male"></i>&nbsp;山东 - 菏泽</p>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="layui-col-xs12" >
+                            <div class="layui-row blogerinfo-contact" >
+                                <div class="layui-col-xs3">
+                                    <div class="blogerinfo-contact1">
+                                        <a href="javascript:;" title="" target="_blank" ><i class="layui-icon layui-icon-login-qq"></i></a>
+                                    </div>
+                                </div>
+                                <div class="layui-col-xs3">
+                                    <div class="blogerinfo-contact2">
+                                        <a href="javascript:;" title="" target="_blank" ><i class="layui-icon layui-icon-camera-fill"></i></a>
+                                    </div>
+                                </div>
+                                <div class="layui-col-xs3">
+                                    <div class="blogerinfo-contact3">
+                                        <a href="javascript:;" title="" target="_blank" ><i class="layui-icon layui-icon-login-weibo"></i></a>
+                                    </div>
+                                </div>
+                                <div class="layui-col-xs3">
+                                    <div class="blogerinfo-contact4">
+                                        <a href="javascript:;" title="" target="_blank" ><i class="layui-icon layui-icon-login-wechat"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <hr style="padding: 0px;">
+                        <div class="layui-col-xs12">
+                            <div class="bloginfo-statistics layui-row layui-col-space5">
+                                <div class="layui-col-xs3">
+                                    <div class="item">
+                                        <span>xx</span>
+                                        <p>博文</p>
+                                    </div>
+                                </div>
+                                <div class="layui-col-xs3">
+                                    <div class="item">
+                                        <span>xx</span>
+                                        <p>细语</p>
+                                    </div>
+                                </div>
+                                <div class="layui-col-xs3">
+                                    <div class="item">
+                                        <span>xx</span>
+                                        <p>评论</p>
+                                    </div>
+                                </div>
+                                <div class="layui-col-xs3">
+                                    <div class="item">
+                                        <span>xx</span>
+                                        <p>留言</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="layui-col-xs12">
+                            <div class="bloginfo-runtime">现在时间是<span style="margin-left:4px;" id="currentTime"></span></div>
+                        </div>
+
+                    </div>
+                </div>
+               <div class="layui-card">
+                   <div class="layui-card-header"><i class="layui-icon layui-icon-fire"></i>热文排行</div>
+                   <div class="layui-card-body">
+                       <ul class="blog-card-ul" id ="hotArticleUl"></ul>
+                          <script id ="hotArticleId" type="text/html">
+               			{{each data as value index}}
+               				<li>
+               					<span class="layui-badge layui-bg-blue">{{index+1}}</span><a title="{{value.articleTitle}}" href="#!article/articledetail/{{value.articleId}}">{{value.articleTitle}}</a>
+               				</li>
+               			{{/each}}
+               			</script>
+                       
+                   </div>
+               </div>
+                <div class="layui-card">
+                    <div class="layui-card-header"><i class="layui-icon layui-icon-praise"></i>作者推荐</div>
+                    <div class="layui-card-body">
+                        <ul class="blog-card-ul" id="recommendArticleUl"></ul>
+						<script id ="recommendArticleId" type="text/html">
+                            {{each data as value index}}
+                           	<li>
+                           		<span class="layui-badge layui-bg-blue">{{index+1}}</span><a title="{{value.articleTitle}}" href="#!article/articledetail/{{value.articleId}}">{{value.articleTitle}}</a>
+                           	</li>
+                           {{/each}}
+						</script>
+                    </div>
+                </div>
+                <div class="layui-card">
+                    <div class="layui-card-header"><i class="layui-icon layui-icon-reply-fill"></i>最新评论</div>
+                    <div class="layui-card-body">
+                        <ul class="remark-list">
+                            <li>
+                                <div class="user-avator" data-name="滥好人">
+                                    <img alt="滥好人" src="http://thirdqq.qlogo.cn/qqapp/101460869/A05BF6BC0E3A29D95964B65B5FD6C26B/40">
+                                </div>
+                                <a href="javascript:;" title="点击查看">
+                                    <div class="remark-content">
+                                        可以<img alt="[good]" src="http://www.leo96.com/lib/layui/images/face/54.gif">
+                                    </div>
+                                </a>
+                            </li>
+                            <li>
+                                <div class="user-avator" data-name="唐伯虎点蚊香">
+                                    <img alt="唐伯虎点蚊香" src="http://thirdqq.qlogo.cn/qqapp/101460869/7FB0ED6F0DEB84BD65B7810AB7251648/40">
+                                </div>
+                                <a href="javascript:;" title="点击查看">
+                                    <div class="remark-content">
+                                        可以
+                                    </div>
+                                </a>
+                            </li>
+
+                        </ul>
+                    </div>
+                </div>
+                <div class="layui-card">
+                    <div class="layui-card-header"><i class="layui-icon layui-icon-speaker"></i>最新留言</div>
+                    <div class="layui-card-body">
+                        <ul class="remark-list">
+                            <li>
+                                <div class="user-avator" data-name="滥好人">
+                                    <img alt="滥好人" src="http://thirdqq.qlogo.cn/qqapp/101460869/A05BF6BC0E3A29D95964B65B5FD6C26B/40">
+                                </div>
+                                <a href="javascript:;" title="点击查看">
+                                    <div class="remark-content">
+                                        可以<img alt="[good]" src="http://www.leo96.com/lib/layui/images/face/54.gif">
+                                    </div>
+                                </a>
+                            </li>
+                            <li>
+                                <div class="user-avator" data-name="唐伯虎点蚊香">
+                                    <img alt="唐伯虎点蚊香" src="http://thirdqq.qlogo.cn/qqapp/101460869/7FB0ED6F0DEB84BD65B7810AB7251648/40">
+                                </div>
+                                <a href="javascript:;" title="点击查看">
+                                    <div class="remark-content">
+                                        可以
+                                    </div>
+                                </a>
+                            </li>
+
+                        </ul>
+
+                    </div>
+                </div>
+                <div class="layui-card">
+                    <div class="layui-card-header"><i class="layui-icon layui-icon-release"></i>一路走来</div>
+                    <div class="layui-card-body">
+                        <ul class="layui-timeline">
+                            <li class="layui-timeline-item">
+                                <i class="layui-icon layui-timeline-axis layui-icon-circle"></i>
+                                <div class="layui-timeline-content layui-text">
+                                    <h3 class="layui-timeline-title">2019年4月1号</h3>
+                                    <p>准备工作就绪，项目开始启动</p>
+                                </div>
+                            </li>
+                            <li class="layui-timeline-item">
+                                <i class="layui-icon layui-timeline-axis layui-icon-circle"></i>
+                                <div class="layui-timeline-content layui-text">
+                                    革命时代
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+<script type="text/javascript">
+	
+	function next(cur){
+		$.get("/article/api/list/0/0",{"currentPage":cur,"pageSize":10},function(response){
+			var htmls = template('articleId', response.data);
+			$("#article-content").html(htmls);
+		})
+	}
+	$(function(){
+		//博文列表
+		
+		
+		$.ajax({
+			url:"/article/api/list/0/0",
+			data:{"currentPage":1,"pageSize":10},
+			dataType:"json",
+			success:function(response){
+				
+				var htmls = template('articleId', response.data);
+				$("#article-content").html(htmls);
+				console.log(response.data);
+				
+				layui.use('laypage', function(){
+				  var laypage = layui.laypage;
+				  //执行一个laypage实例
+				  laypage.render({
+				    elem: 'page' //注意，这里的 test1 是 ID，不用加 # 号
+				    ,count: response.data.totalCount ,//数据总数，从服务端得到
+					limit: 10,
+					  jump: function(obj, first){
+						//obj包含了当前分页的所有参数，比如：
+						//console.log(obj.curr); //得到当前页，以便向服务端请求对应页的数据。
+						next(obj.curr)
+						//首次不执行
+						if(!first){
+						  //do something
+						}
+					  }
+				  });
+				});
+
+
+
+
+
+
+
+
+			}
+		})
+		//置顶博文
+		$.ajax({
+			url:"/article/api/list/0/1",
+			data:{"currentPage":1,"pageSize":10},
+			dataType:"json",
+			success:function(response){
+				var htmls = template('articleId', response.data);
+				$("#article-up").html(htmls);
+				console.log(response.data);
+			}
+		})
+		//热门文章
+		$.get("/article/api/hot/ranking/6",function(response){
+			
+			var htmls = template('hotArticleId', response);
+			$("#hotArticleUl").html(htmls);
+		})
+		//作者推荐
+		$.get("/article/api/recommend/6",function(response){
+			var htmls = template('recommendArticleId', response);
+			$("#recommendArticleUl").html(htmls);
+		})
+	})
+    layui.use(['element','layer','jquery','carousel'], function(){
+        var element = layui.element,
+            $ = layui.jquery,
+            layer = layui.layer,
+            carousel = layui.carousel;
+
+        //建造实例
+        carousel.render({
+            elem: '#carousel-msg',
+            width: '97%',
+            height:'17',
+            autoplay:true,
+            arrow: 'none',
+            indicator:'none',
+            anim:'fade',
+            interval:'4000'
+        });
+        $("#currentTime").text(new Date().toLocaleString());
+        setInterval(function(){
+            $("#currentTime").text(new Date().toLocaleString());
+        },1000);
+
+
+
+    });
+	
+
+</script>

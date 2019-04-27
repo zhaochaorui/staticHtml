@@ -1,0 +1,300 @@
+
+<div class="layui-container">
+    <div class="layui-row layui-col-space15">
+        <!-- 轮播公告-->
+        <div class="layui-col-md12">
+            <div class="layui-card">
+                <div class="layui-card-body  layui-card-msg">
+                    <i class="layui-icon layui-icon-location" style="margin-right: 7px;"></i>
+                    <div class="layui-card-title">
+                            <span lay-separator="&gt;" class="layui-breadcrumb" style=" visibility: visible;">
+                            <a href="#!home">首页</a><span lay-separator="">&gt;</span>
+                             <a href="#!article/articlelist">博文广场</a><span lay-separator="">&gt;</span>
+                            <a><cite>新功能上线</cite></a>
+
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="layui-col-md8">
+            <div class="layui-row layui-col-space15">
+                <div class="layui-col-md12">
+                    <div class="layui-card">
+                        <div class="layui-card-body article-detail">   </div>
+							<script id="detailId" type="text/html">
+                                <div class="article-tool">
+                                    <!-- 左侧工具条-->
+                                    <div style="float:left;">
+                                        <button title="发布日期" class="layui-btn layui-btn-primary layui-btn-xs">
+                                           {{updateTime}}
+                                        </button>
+                                        <div class="layui-btn-group">
+                                            <button title="浏览" class="layui-btn layui-btn-primary layui-btn-xs">
+                                                <i class="layui-icon layui-icon-read"></i><span style="margin-left:3px;"> {{articleLookNum}}</span>
+                                            </button>
+                                            <button title="评论" class="layui-btn layui-btn-primary layui-btn-xs">
+                                                <i class="layui-icon layui-icon-reply-fill"></i><span style="margin-left:3px;">{{articleCommentNum}}</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <!-- 右侧工具条-->
+                                    <div class="tool-box">
+
+                                    </div>
+                                </div>
+
+                                <div class="article-detail-title">
+                                    {{title}}
+                                </div>
+                                <div class="article-detail-abstract">
+                                    <span class="layui-badge">摘要</span>
+                                    <span id="abstract">{{articleDesc}}</span>
+                                </div>
+                                <div class="article-detail-content">
+                                   {{articleContent}}
+
+                                    <div class="article-detail-copyright">
+                                        <p>版权声明：本文由<a style="color:#1E9FFF;margin:0 5px;" href="/">zcr</a>原创出品，转载请注明出处！</p>
+                                        <p>本文链接：<a href="javascript:;">https://qihaoya.com/www/article/detail/33</a></p>
+                                    </div>
+
+                                </div>
+							
+
+							</div>
+							</div>
+                            <div class="article-component">
+                                <div class="component-box">
+                                    <a blog-event="praise" class="praise" href="javascript:void(0);" onclick="praise({{articleId}})" ><i class="fa fa-thumbs-up fa-fw"></i>点赞（<span id="praiseCnt"></span>）</a>
+                                    <a blog-event="reword" class="reword" href="javascript:;">赏</a>
+                                    <a blog-event="share" class="share" href="javascript:;"><i class="fa fa-share-alt fa-fw"></i>分享（<span id="shareCnt">0</span>）</a>
+                                </div>
+							</script>
+                    </div>
+				</div>
+                <div class="layui-col-md12">
+                    <div class="layui-card">
+                        <div class="layui-card-body article-music">
+                            <div style="border-bottom:1px solid #ddd;">
+                                <span class="layui-badge">本文配乐</span>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <!-- 评论-->
+                <div class="layui-col-md12">
+                    <div class="layui-card">
+                        <div class="layui-card-body blog-card">
+                            <fieldset style="margin-bottom:0" class="layui-elem-field layui-field-title">
+                                <legend>来说两句吧</legend>
+                                <div class="layui-field-box">
+                                    <form class="layui-form blog-editor">
+                                        <div class="layui-form-item">
+                                            <textarea id="remarkEditor" style="display: none;" ></textarea>
+                                        </div>
+                                        <div class="layui-form-item">
+                                            <button lay-filter="formRemark" lay-submit="formRemark" class="layui-btn  ">提交评论</button>
+                                        </div>
+                                    </form>
+
+                                </div>
+                            </fieldset>
+                            <div class="blog-card-title">最新评论</div>
+                            <ul class="blog-comment">
+                                <li>
+                                    <div class="comment-parent">
+                                        <a name="remark-29"></a>
+                                        <img alt="Leo" src="http://thirdqq.qlogo.cn/qqapp/101460869/551A0EA193845763D43A01B27CA1A798/40">
+                                        <div class="info">
+                                            <span class="username">Leo</span>
+                                        </div>
+                                        <div class="content">
+                                            各位行行好<img alt="[哈哈]" src="http://www.leo96.com/lib/layui/images/face/2.gif">
+                                        </div>
+                                        <p class="info info-footer"><span class="time">2018-04-10 12:14</span><a data-targetname="Leo" data-targetid="1" class="btn-reply" href="javascript:;">回复</a></p>
+                                    </div>
+                                    <div class="replycontainer layui-hide">
+                                        <form action="" class="layui-form">
+                                            <div class="layui-form-item">
+                                                <textarea style="min-height:80px;" class="layui-textarea" placeholder="回复【Leo】" lay-verify="replyContent" name="replyContent"></textarea>
+                                            </div>
+                                            <div class="layui-form-item">
+                                                <button lay-filter="formReply" lay-submit="formReply" class="layui-btn layui-btn-xs  ">提交</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="comment-parent">
+                                        <a name="remark-30"></a>
+                                        <img alt="" src="http://thirdqq.qlogo.cn/qqapp/101460869/4C77F64DCDA67528B05A1D56B9597A0A/40">
+                                        <div class="info">
+                                            <span class="username"></span>
+                                        </div>
+                                        <div class="content">
+                                            <p>
+                                                新功能不错啊，前端可以玩玩这个&nbsp;<a href="https://cdn.aekun.com/Content/music/jquery.pjax.js" target="_blank" class="html-attribute-value html-resource-link">pjax</a>&nbsp;，数据库访问感觉还是有点慢呀。<img alt="[嘻嘻]" src="http://www.leo96.com/lib/layui/images/face/1.gif">
+                                            </p>
+                                            <p><br></p>
+                                            <p>来自aekun</p>
+                                        </div>
+                                        <p class="info info-footer"><span class="time">2018-04-10 16:06</span><a data-targetname="" data-targetid="14" class="btn-reply" href="javascript:;">回复</a></p>
+                                    </div>
+                                    <hr>
+                                    <div class="comment-child">
+                                        <a name="reply-56"></a>
+                                        <img alt="Leo" src="http://thirdqq.qlogo.cn/qqapp/101460869/551A0EA193845763D43A01B27CA1A798/40">
+                                        <div class="info">
+                                            <span class="username">Leo</span>
+                                            <span style="padding-right:0;margin-left:-5px;">回复</span>
+                                            <span class="username"></span>
+                                            <span>嗯 这个我知道  没用过  有空试试 </span>
+                                        </div>
+                                        <p class="info"><span class="time">2018-04-10 23:01</span><a data-targetname="Leo" data-targetid="1" class="btn-reply" href="javascript:;">回复</a></p>
+                                    </div>
+                                </li>
+
+                            </ul>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+        <div class="layui-col-md4">
+            <div class="layui-card ">
+                <div class="layui-card-header classific-nav-header">分类导航</div>
+                <div class="layui-card-body classific-nav-boday  layui-row layui-col-space10 " id="category">
+					<script id ="categoryId" type="text/html">
+						{{each data as value i}}
+							<div class="layui-col-xs6">
+								<a href="#!article/articlelist/{{value.cateId}}">{{value.cateName}}</a> 
+							</div>
+
+						{{/each}}
+                    </script>
+                </div>
+            </div>
+
+            <div class="layui-card">
+                <div class="layui-card-header"><i class="layui-icon layui-icon-fire"></i>热文排行</div>
+                <div class="layui-card-body">
+                    <ul class="blog-card-ul" id ="hotArticleUl"></ul>
+                       <script id ="hotArticleId" type="text/html">
+						{{each data as value index}}
+							<li>
+								<span class="layui-badge layui-bg-blue">{{index+1}}</span><a title="{{value.articleTitle}}" href="#!article/articledetail/{{value.articleId}}">{{value.articleTitle}}</a>
+							</li>
+						{{/each}}
+						</script>
+                    
+                </div>
+            </div>
+
+            <div class="layui-card">
+                <div class="layui-card-header"><i class="layui-icon layui-icon-flag"></i>赞助商</div>
+                <div class="layui-card-body blog-production">
+                    <a class="layui-bg-blue" target="_blank" href="http://www.layui.com/">layui经典模块化前端框架</a>
+                    <a style="background-color: #4CAF50;" target="_blank" href="http://www.layui.com/admin/?from=fly">layuiAdmin - layui 官方后台管理模板</a>
+                </div>
+            </div>
+
+            <div class="layui-card">
+                <div class="layui-card-header"><i class="layui-icon layui-icon-template"></i>个人作品</div>
+                <div class="layui-card-body blog-production">
+                    <a class="layui-bg-green" target="_blank" href="http://www.yangxiaobing.org">后台管理系统iframe版</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+	
+	$(function(){
+// 		$.ajax({
+// 			url:"/test/show",
+// 			type:"GET",
+// 			dataType:"json",
+// 			success:function(data){
+// 				if(data.status==401){
+// 					location.href="/www/login.html?redirectUrl="+window.location.href;
+// 				}
+// 			}
+// 		})
+		var href = window.location.href;
+		var paramIndex=href.lastIndexOf("/");
+		var param=href.substring(paramIndex+1);
+		//文章详情
+		$.ajax({
+			url:"/article/api/detail/"+param,
+			dataType:"json",
+			success:function(response){
+				var htmls = template('detailId', response.data);
+				$(".article-detail").html(htmls);
+				$("#praiseCnt").text( response.data.articlePraiseNum);
+				console.log(response);
+			}
+		})
+		//文章分类
+		$.get("/article/api/category/list/6",function(response){
+			
+			var htmls = template('categoryId', response);
+			$("#category").html(htmls);
+		})
+		//热门文章
+		$.get("/article/api/hot/ranking/6",function(response){
+			
+			var htmls = template('hotArticleId', response);
+			$("#hotArticleUl").html(htmls);
+		})
+
+	})
+	
+	function praise(articleId){
+		$.get("/article/praise/"+articleId,function(response){
+			console.log(response)
+			if(response.status==401){
+				layer.confirm('请先登录？', {
+				  btn: ['登录','再看看'] //按钮
+				}, function(){
+				   location.href="/www/login.html?redirectUrl="+window.location.href;
+				});
+				return;
+			}
+		
+			var praise=response.data.count
+			if(response.data.status==1){
+				$("#praiseCnt").text( praise);
+				layer.msg("已赞");
+			}else{
+				$("#praiseCnt").text(praise);
+				//layer.msg("");
+			}
+// 		//	response['articleId']=articleId;
+// 			var htmls = template('detailId', response);
+// 			$(".article-detail").html(htmls);
+		})
+	}
+	
+	
+    layui.use(['element','layer','jquery','layedit'], function(){
+        var element = layui.element,
+            $ = layui.jquery,
+            layer = layui.layer,
+            layedit = layui.layedit;
+
+        /**建立编辑器*/
+        var index = layedit.build('remarkEditor',{
+            height: 150, //设置编辑器高度
+            tool: ['left','center','right','|','link','unlink','|','face']
+
+        });
+
+    });
+</script>

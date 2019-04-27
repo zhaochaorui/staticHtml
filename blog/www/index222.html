@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<script src="../js/jquery-3.3.1.min.js"></script>
+	<script src="https://cdn.staticfile.org/angular.js/1.4.6/angular.min.js"></script>
+	<script src="static/js/Home.js"></script>
+	<script src="../js/layer-v3.1.1/layer/layer.js" type="text/javascript" charset="utf-8"></script>
+	
+	<script src="static/js/template.js"></script>
+		
+
+<script>
+$(document).ready(function(){
+
+$.ajax({
+			url:"/article/list",
+			data:{"currentPage":1,"pageSize":10},
+			dataType:"json",
+			success:function(response){
+				var data=response;
+// 				$.each(response.data,function(index,item){
+// 					$(".article").
+// 					
+// 				})
+				console.log(response.data);
+				var html = template('test', data);
+				$("#content").html(html)
+			}
+			
+		})
+	
+	//document.getElementById('content').innerHTML = html;
+
+});
+</script>
+</head>
+
+<body>
+	<div id ="content"></div>
+	<script id="test" type="text/html">
+		{{each data}}
+			<input type="text" value="{{$value.articleTitle}}" />
+		{{/each}}
+	</script>
+</body>
+</html>
