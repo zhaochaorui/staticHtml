@@ -12,11 +12,6 @@
     <link rel="stylesheet" href="static/css/main.css">
 	<script src="../js/jquery-3.3.1.min.js"></script>
 	<script src="static/js/template.js"></script>
-	<style type="text/css">
-		#userInfoId ul{list-style: none}
-		#userInfoId ul li{width: 50px;font-family: 微软雅黑;text-align: center;background:rgb(242,242,242)}
-		#userInfoId{display: none;}
-	</style>
 </head>
 
 <body>
@@ -114,6 +109,7 @@
             </li>
 
         </ul>
+		<input type="hidden" name="flag" id="flaginput" value="0" />
     </div>
 </div>
 
@@ -207,10 +203,12 @@
 			success:function(response){
 				
 				if(response.status==401){
+					$("#flaginput").val(0)
 					$("#loginIcon").show();
 				}else if(response.data==null){
 					$("#loginIcon").show();
 				}else{
+					$("#flaginput").val(1)
 					$("#loginIcon").hide();
 					$("#userId").text(response.data);
 				}

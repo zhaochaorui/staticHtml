@@ -110,7 +110,7 @@
                                         <a name="remark-29"></a>
                                         <img alt="Leo" src="http://thirdqq.qlogo.cn/qqapp/101460869/551A0EA193845763D43A01B27CA1A798/40">
                                         <div class="info">
-                                            <span class="username">{{value.userName}}</span>
+                                            <span class="username">{{value.username}}</span>
                                         </div>
                                         <div class="content">
                                             {{value.commentContent}}<!-- <img alt="[哈哈]" src="http://www.leo96.com/lib/layui/images/face/2.gif"> -->
@@ -118,14 +118,12 @@
                                         <p class="info info-footer"><span class="time">2018-04-10 12:14</span><a data-targetname="Leo" data-targetid="1" class="btn-reply" href="javascript:;" onclick="replyFirst('{{value.userId}}','{{value.commentId}}','{{isindex}}')">回复</a></p>
 																			
 										<div class="replycontainer-first "  style="display: none;" >
-										    <form action="" class="layui-form">
 										        <div class="layui-form-item">
-										            <textarea style="min-height:80px;" class="layui-textarea replyContentFirst" placeholder="回复{{value.userName}}" lay-verify="replyContent" name="replyContent"></textarea>
+										            <textarea style="min-height:80px;" class="layui-textarea replyContentFirst" placeholder="回复{{value.username}}" lay-verify="replyContent" name="replyContent"></textarea>
 										        </div>
 										        <div class="layui-form-item">
 										            <button   class="layui-btn layui-btn-xs  " onclick="replySubmitFirst('{{value.userId}}','{{value.commentId}}','{{isindex}}')">提交</button>
 										        </div>
-										    </form>
 										</div>
 									</div>
 									<hr>
@@ -135,7 +133,7 @@
 									    <a name="reply-56"></a>
 									    <img alt="Leo" src="http://thirdqq.qlogo.cn/qqapp/101460869/551A0EA193845763D43A01B27CA1A798/40">
 									    <div class="info">
-									        <span class="username">{{child.userName}}</span>
+									        <span class="username">{{child.username}}</span>
 									        <span style="padding-right:0;margin-left:-5px;">回复{{child.quoteNickName}}</span>
 									        <span class="username"></span>
 									        <span>{{child.commentContent}} </span>
@@ -144,14 +142,12 @@
 									</div>
 									
                                     <div class="replycontainer "  style="display: none;" >
-                                        <form action="" class="layui-form">
                                             <div class="layui-form-item">
-                                                <textarea style="min-height:80px;" class="layui-textarea replyContent" placeholder="回复{{child.userName}}" lay-verify="replyContent" name="replyContent"></textarea>
+                                                <textarea style="min-height:80px;" class="layui-textarea replyContent" placeholder="回复{{child.username}}" lay-verify="replyContent" name="replyContent"></textarea>
                                             </div>
                                             <div class="layui-form-item">
                                                 <button  class="layui-btn layui-btn-xs  " onclick="replySubmit('{{child.userId}}','{{value.commentId}}','{{replycount++}}')">提交</button>
                                             </div>
-                                        </form>
                                     </div>
 									{{/each}}
                                 </li>
@@ -222,44 +218,80 @@
 	var paramIndex=href.lastIndexOf("/");
 	var param=href.substring(paramIndex+1);
 	
+	function checkIsLogin(){
+		if($("#flaginput").val()==0){
+			layer.confirm('请先登录？', {
+			  btn: ['登录','再看看'] //按钮
+			}, function(){
+			   location.href="/www/login.html?redirectUrl="+window.location.href;
+			});
+			return false;
+		}else{
+			return true;
+		}
+	}
+	
+	
 	function reply(quoteUserId,commentId,index){
-		console.log(index)
+		if(!checkIsLogin()){
+			return ;
+		}
 		$(".replycontainer").css("display","none");
+		$(".replycontainer-first").css("display","none");
 		$(".replycontainer").eq(index).css("display","block");
 	}
 	
 	function replyFirst(quoteUserId,commentId,index){
+		if(!checkIsLogin()){
+			return ;
+		}
+		$(".replycontainer").css("display","none");
 		$(".replycontainer-first").css("display","none");
 		$(".replycontainer-first").eq(index).css("display","block");
 		
 	}
+
 	//评论回复
 	function replySubmitArtilcle(){
-		var content = $("#remarkEditor").val();
-		alert(content)
+		if(!checkIsLogin()){
+			return ;
+		}
+
+		var content = layui.layedit.getText(index);
 		var data={'commentContent':content}
 		var url = '/comment/api/reply/0/'+param+'/0';
 		$.get(url,data,function(response){
-			console.log(response)
+			if(response.data==1){
+				findCommentList();
+			}
 		})
 	}
 	//评论回复一级评论
 	function replySubmitFirst(quoteUserId,commentId,index){
+		if(!checkIsLogin()){
+			return ;
+		}
 		var content = $(".replyContentFirst").eq(index).val();
 		var data={'commentContent':content}
 		var url = '/comment/api/reply/'+quoteUserId+'/'+param+'/'+commentId+'';
 		$.get(url,data,function(response){
-			console.log(response)
+			if(response.data==1){
+				findCommentList();
+			}
 		})
 	}
 	//评论回复子评论
 	function replySubmit(quoteUserId,commentId,index){
-		alert(quoteUserId)
+		if(!checkIsLogin()){
+			return ;
+		}
 		var content = $(".replyContent").eq(index).val();
 		var data={'commentContent':content}
 		var url = '/comment/api/reply/'+quoteUserId+'/'+param+'/'+commentId+'';
 		$.get(url,data,function(response){
-			console.log(response)
+			if(response.data==1){
+				findCommentList();
+			}
 		})
 	}
 	$(function(){
@@ -288,18 +320,19 @@
 			$("#hotArticleUl").html(htmls);
 		})
 		//评论
+		findCommentList();
+	})
+	//评论
+	function findCommentList(){
 		$.get("/comment/api/list/"+param,{"currentPage":1,"pageSize":10},function(response){
 				console.log(response)
 			response.data['count']=0;
 			response.data['replycount']=0;
 			var htmls = template('commentId', response.data);
 			$(".blog-comment").html(htmls);
-			
-			
 		})
-
-	})
-	
+	}
+	//点赞
 	function praise(articleId){
 		$.get("/article/praise/"+articleId,function(response){
 			
@@ -320,25 +353,22 @@
 				$("#praiseCnt").text(praise);
 				//layer.msg("");
 			}
-// 		//	response['articleId']=articleId;
-// 			var htmls = template('detailId', response);
-// 			$(".article-detail").html(htmls);
 		})
 	}
 	
-	
+	var index;
     layui.use(['element','layer','jquery','layedit'], function(){
         var element = layui.element,
             $ = layui.jquery,
             layer = layui.layer,
             layedit = layui.layedit;
-
+		
         /**建立编辑器*/
-        var index = layedit.build('remarkEditor',{
+        index = layedit.build('remarkEditor',{
             height: 150, //设置编辑器高度
             tool: ['left','center','right','|','link','unlink','|','face']
 
         });
-
+		console.log(layedit.getContent(index))
     });
 </script>
